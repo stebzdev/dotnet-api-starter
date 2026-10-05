@@ -1,0 +1,33 @@
+<Solution>
+  <Folder Name="/Elementi di soluzione/">
+    <File Path=".dockerignore" />
+    <File Path=".gitattributes" />
+    <File Path="compose.yml" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="DockerFile" />
+    <File Path="Dockerfile.Keycloak" />
+    <File Path="Dockerfile.Migrations" />
+  </Folder>
+  <Folder Name="/keycloak/">
+    <File Path="keycloak/entrypoint.sh" />
+  </Folder>
+  <Folder Name="/keycloak/import/" />
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Starter.Api/Starter.Api.csproj" />
+    <Project Path="src/Starter.AppHost/Starter.AppHost.csproj" />
+    <Project Path="src/Starter.Application/Starter.Application.csproj" />
+    <Project Path="src/Starter.Domain/Starter.Domain.csproj" />
+    <Project Path="src/Starter.Infrastructure/Starter.Infrastructure.csproj" />
+    <Project Path="src/Starter.ServiceDefaults/Starter.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Starter.Api.Tests/Starter.Api.Tests.csproj" />
+    <Project Path="tests/Starter.Application.Tests/Starter.Application.Tests.csproj" Id="527bd04d-e80a-4f95-a64d-a255cf615c67" />
+    <Project Path="tests/Starter.Architecture.Tests/Starter.Architecture.Tests.csproj" Id="e982157f-ceb3-4154-8834-a6d592b34ea4" />
+    <Project Path="tests/Starter.Domain.Tests/Starter.Domain.Tests.csproj" />
+  </Folder>
+</Solution>

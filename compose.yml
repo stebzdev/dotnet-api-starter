@@ -1,0 +1,73 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: Starter
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - Starter-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d Starter"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  keycloak:
+    image: ghcr.io/stebzdev/Starter-keycloak:latest
+    command: start-dev --import-realm
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    volumes:
+      - Starter-keycloak-data:/opt/keycloak/data
+
+  Starter-migrations:
+    image: ghcr.io/stebzdev/Starter-migrations:latest
+    environment:
+      ConnectionStrings__StarterDb: "Host=postgres;Port=5432;Database=Starter;Username=postgres;Password=postgres"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  Starter-api:
+    image: ghcr.io/stebzdev/Starter-api:latest
+    ports:
+      - "8081:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+
+      ConnectionStrings__StarterDb: "Host=postgres;Port=5432;Database=Starter;Username=postgres;Password=postgres"
+      ConnectionStrings__cache: "redis:6379"
+
+      Keycloak__Realm: Starter
+      Keycloak__Audience: Starter-api
+      Keycloak__Issuer: "http://localhost:8080/realms/Starter"
+      Keycloak__MetadataAddress: http://keycloak:8080/realms/Starter/.well-known/openid-configuration
+      services__keycloak__http__0: "http://keycloak:8080"
+
+    depends_on:
+      Starter-migrations:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+
+volumes:
+  Starter-postgres-data:
+  Starter-keycloak-data:

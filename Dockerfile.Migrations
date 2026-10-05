@@ -1,0 +1,22 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0
+
+WORKDIR /src
+
+COPY ["Directory.Build.props", "."]
+COPY ["Directory.Packages.props", "."]
+
+COPY ["src/Starter.Api/Starter.Api.csproj", "src/Starter.Api/"]
+COPY ["src/Starter.Application/Starter.Application.csproj", "src/Starter.Application/"]
+COPY ["src/Starter.Domain/Starter.Domain.csproj", "src/Starter.Domain/"]
+COPY ["src/Starter.Infrastructure/Starter.Infrastructure.csproj", "src/Starter.Infrastructure/"]
+COPY ["src/Starter.ServiceDefaults/Starter.ServiceDefaults.csproj", "src/Starter.ServiceDefaults/"]
+
+RUN dotnet restore "src/Starter.Api/Starter.Api.csproj" \
+    && dotnet tool install --global dotnet-ef --version 10.0.11
+
+COPY . .
+
+
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+ENTRYPOINT ["dotnet-ef", "database", "update", "--project", "src/Starter.Application/Starter.Application.csproj", "--startup-project", "src/Starter.Api/Starter.Api.csproj"]

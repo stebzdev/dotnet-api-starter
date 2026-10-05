@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs: 
+    build-and-test:
+            runs-on: ubuntu-latest
+            steps: 
+                - name: Checkout repository
+                  uses: actions/checkout@v7 
+                  with:
+                    fetch-depth: 0
+                
+                - name: Setup .NET
+                  uses: actions/setup-dotnet@v6
+                  with:
+                    dotnet-version: 10.0.x
+
+                - name: Restore dependencies
+                  run: dotnet restore
+
+                - name: Build
+                  run: dotnet build --no-restore --configuration Release
+
+                - name: Install SonarScanner
+                  run: dotnet tool install --global dotnet-sonarscanner --version 11.3.0
+
+                - name: Begin SonarQube analysis
+                  env: 
+                    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+                  run: >
+                    dotnet sonarscanner begin 
+                    /k:"stebzdev_Finaura"
+                    /o:"stebzdev"
+                    /d:sonar.token="$SONAR_TOKEN"
+                    /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
+                    /d:sonar.coverage.exclusions="**/Migrations/**,**/Finaura.AppHost/**,**/Finaura.ServiceDefaults/**"
+                    /d:sonar.qualitygate.wait=true
+
+                - name: Build for SonarQube analysis
+                  run: dotnet build --no-restore --configuration Release --no-incremental
+
+                - name: Test
+                  run: dotnet test --no-build --verbosity normal --configuration Release --collect:"XPlat Code Coverage;Format=opencover"
+
+                - name: End SonarQube analysis
+                  env: 
+                    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+                  run: >
+                     dotnet sonarscanner end
+                     /d:sonar.token="$SONAR_TOKEN"
+
+    docker: 
+            name: Build and Push Docker Image
+            runs-on: ubuntu-latest
+            needs: build-and-test
+
+            permissions:
+                contents: read
+                packages: write
+
+            steps:
+                - name: Checkout repository
+                  uses: actions/checkout@v7
+
+                - name: Log in to GitHub Container Registry
+                  if: github.event_name == 'push'
+                  uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+                  with:
+                    registry: ghcr.io
+                    username: ${{ github.actor }}
+                    password: ${{ secrets.GITHUB_TOKEN }}
+
+                - name: Build Docker Image
+                  uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+                  with:
+                      context: .
+                      file: Dockerfile
+                      push: ${{github.event_name == 'push'}}
+                      tags: |
+                        ghcr.io/${{ github.repository_owner }}/finaura-api:latest
+                        ghcr.io/${{ github.repository_owner }}/finaura-api:sha-${{ github.sha }}
+
+                - name: Build Migrations Docker Image
+                  uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+                  with:
+                    context: .
+                    file: Dockerfile.Migrations
+                    push: ${{ github.event_name == 'push'}}
+                    tags: |
+                      ghcr.io/${{ github.repository_owner }}/finaura-migrations:latest
+                      ghcr.io/${{ github.repository_owner }}/finaura-migrations:sha-${{ github.sha }}
+                      
+                - name: Build Keycloak Docker Image
+                  uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+                  with:
+                    context: .
+                    file: Dockerfile.Keycloak
+                    push: ${{ github.event_name == 'push' }}
+                    tags: |
+                      ghcr.io/${{ github.repository_owner }}/finaura-keycloak:latest
+                      ghcr.io/${{ github.repository_owner }}/finaura-keycloak:sha-${{ github.sha }}                      

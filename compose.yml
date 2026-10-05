@@ -63,7 +63,7 @@ services:
       ConnectionStrings__StarterDb: "Host=postgres;Port=5432;Database=Starter;Username=postgres;Password=postgres"
       ConnectionStrings__cache: "redis:6379"
 
-      SEQ_URI: "http://seq:5341"
+      Aspire__Seq__ServerUrl: "http://seq:5341"
 
       Keycloak__Realm: Starter
       Keycloak__Audience: Starter-api

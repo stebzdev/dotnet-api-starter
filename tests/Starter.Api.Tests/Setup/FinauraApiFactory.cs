@@ -29,7 +29,6 @@ public sealed class StarterApiFactory(PostgreSqlFixture postgresFixture) : WebAp
             services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = TestAuthDefaults.AuthenticationScheme;
-
                     options.DefaultChallengeScheme = TestAuthDefaults.AuthenticationScheme;
                 })
                 .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(

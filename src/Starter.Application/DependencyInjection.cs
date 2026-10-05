@@ -1,9 +1,8 @@
 ﻿using System.Text.Json;
 using Starter.Application.Common.Caching;
 using Starter.Application.Common.Persistence;
-using Starter.Application.ReportingEntities.Create;
-using Starter.Application.ReportingEntities.GetById;
-using Starter.Application.ReportingPeriods.Create;
+using Starter.Application.SampleItems.Create;
+using Starter.Application.SampleItems.GetById;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +21,7 @@ public static class DependencyInjection
         });
 
         var jsonSerializerOptions = new JsonSerializerOptions();
-        jsonSerializerOptions.Converters.Add(new ReportingEntityCodeJsonConverter());
+        jsonSerializerOptions.Converters.Add(new SampleItemCodeJsonConverter());
         services.AddKeyedSingleton<JsonSerializerOptions>(typeof(IHybridCacheSerializer<>), jsonSerializerOptions);
 
         services.AddHybridCache(options =>
@@ -34,9 +33,8 @@ public static class DependencyInjection
             };
         });
 
-        services.AddScoped<CreateReportingPeriodHandler>();
-        services.AddScoped<CreateReportingEntityHandler>();
-        services.AddScoped<GetReportingEntityHandler>();
+        services.AddScoped<CreateSampleItemHandler>();
+        services.AddScoped<GetSampleItemHandler>();
 
         return services;
     }

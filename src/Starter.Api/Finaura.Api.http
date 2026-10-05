@@ -1,22 +1,11 @@
 @Starter.Api_HostAddress = https://localhost:7055
 
-### Create reporting entity
+### Create sample entity
 
-POST {{Starter.Api_HostAddress}}/api/reporting-entities
+POST {{Starter.Api_HostAddress}}/api/sample-entities
 Content-Type: application/json
 
 {
   "name": "Aurora Financial Group",
   "code": "AFG001"
-}
-
-### Create reporting period
-
-POST {{Starter.Api_HostAddress}}/api/reporting-periods
-Content-Type: application/json
-
-{
-  "reportingEntityId": "7c185eeb-8b17-4d0a-8edd-12c53e69db81",
-  "referenceYear": 2026,
-  "referenceMonth": 9
 }

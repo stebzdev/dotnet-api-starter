@@ -2,7 +2,7 @@ FROM quay.io/keycloak/keycloak:26.7.4
 
 USER root
 
-COPY ["keycloak/import/Starter-realm.json", "/opt/keycloak/bootstrap/Starter-realm.json"]
-COPY --chmod=755 ["keycloak/entrypoint.sh", "/opt/keycloak/bin/Starter-entrypoint.sh"]
+COPY ["keycloak/import/starter-realm.json", "/opt/keycloak/bootstrap/starter-realm.json"]
+COPY --chmod=755 ["keycloak/entrypoint.sh", "/opt/keycloak/bin/starter-entrypoint.sh"]
 
-ENTRYPOINT ["/opt/keycloak/bin/Starter-entrypoint.sh"]
+ENTRYPOINT ["/opt/keycloak/bin/starter-entrypoint.sh"]

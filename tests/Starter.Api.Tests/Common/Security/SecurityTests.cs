@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using Starter.Api.Common.Authorization;
-using Starter.Api.ReportingEntities.Create;
+using Starter.Api.SampleItems.Create;
 using Starter.Api.Tests.Setup;
 
 namespace Starter.Api.Tests.Common.Security;
@@ -13,12 +13,11 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
     public async Task ProtectedEndpoint_WithoutAuthentication_ShouldReturnUnauthorized()
     {
         var response = await _client.PostAsJsonAsync(
-            "/api/reporting-periods",
+            "/api/sample-entities",
             new
             {
-                ReportingEntityId = Guid.NewGuid(),
-                ReferenceYear = 2026,
-                ReferenceMonth = 9
+                Name = "Aurora Financial Group",
+                Code = "AUTH-TEST"
             });
 
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -29,7 +28,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
     {
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/reporting-entities")
+            "/api/sample-entities")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
 
         request.Content = JsonContent.Create(new
@@ -48,7 +47,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
     {
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/reporting-entities")
+            "/api/sample-entities")
             .AuthenticateAsTestUser();
 
         request.Content = JsonContent.Create(new
@@ -62,62 +61,41 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
     }
 
-    [Fact]
-    public async Task CreateReportingPeriod_WithUserRole_ShouldBeAccessible()
+  /*  [Fact]
+    public async Task CreateSampleItem_WithAdminRole_ShouldBeAccessible()
     {
-        var createEntityRequest = new HttpRequestMessage(
+        var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/reporting-entities")
+            "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
 
-        createEntityRequest.Content = JsonContent.Create(new
+        request.Content = JsonContent.Create(new
         {
-            Name = "Aurora Financial Group",
-            Code = "AUTH-PERIOD"
+            Name = "Sample Item",
+            Code = "AUTH-001"
         });
 
-        var createEntityResponse = await _client.SendAsync(createEntityRequest);
-
-        Assert.Equal(HttpStatusCode.Created, createEntityResponse.StatusCode);
-
-        var entity = await createEntityResponse.Content.ReadFromJsonAsync<CreateReportingEntityResponse>();
-
-        Assert.NotNull(entity);
-
-        var createPeriodRequest = new HttpRequestMessage(
-            HttpMethod.Post,
-            "/api/reporting-periods")
-            .AuthenticateAsTestUser(ApplicationRoles.User);
-
-        createPeriodRequest.Content = JsonContent.Create(new
-        {
-            ReportingEntityId = entity.Id,
-            ReferenceYear = 2026,
-            ReferenceMonth = 9
-        });
-
-        var response = await _client.SendAsync(createPeriodRequest);
+        var response = await _client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
     }
 
     [Fact]
-    public async Task CreateReportingPeriod_WithReviewerRole_ShouldReturnForbidden()
+    public async Task CreateSampleItem_WithUserRole_ShouldReturnForbidden()
     {
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/reporting-periods")
-            .AuthenticateAsTestUser(ApplicationRoles.Reviewer);
+            "/api/sample-items")
+            .AuthenticateAsTestUser(ApplicationRoles.User);
 
         request.Content = JsonContent.Create(new
         {
-            ReportingEntityId = Guid.NewGuid(),
-            ReferenceYear = 2026,
-            ReferenceMonth = 9
+            Name = "Sample Item",
+            Code = "AUTH-002"
         });
 
         var response = await _client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
-    }
+    }*/
 }

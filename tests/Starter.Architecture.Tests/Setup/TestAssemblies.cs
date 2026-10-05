@@ -7,9 +7,9 @@ namespace Starter.Architecture.Tests.Setup;
 
 internal static class TestAssemblies
 {
-    internal static readonly Assembly Domain = typeof(Domain.ReportingPeriods.ReportingPeriod).Assembly;
+    internal static readonly Assembly Domain = typeof(Domain.SampleItems.SampleItem).Assembly;
     internal static readonly Assembly Application = typeof(Application.DependencyInjection).Assembly;
-    internal static readonly Assembly Api = typeof(Api.ReportingPeriods.Create.CreateReportingPeriodEndpoint).Assembly;
+    internal static readonly Assembly Api = typeof(Api.SampleItems.Create.CreateSampleItemEndpoint).Assembly;
   //  internal static readonly Assembly Infrastructure = typeof(Infrastructure.DependencyInjection).Assembly;
 
 

@@ -15,7 +15,7 @@ public sealed class HybridCacheTestFixture : IAsyncDisposable
         var services = new ServiceCollection();
 
         var jsonSerializerOptions = new JsonSerializerOptions();
-        jsonSerializerOptions.Converters.Add(new ReportingEntityCodeJsonConverter());
+        jsonSerializerOptions.Converters.Add(new SampleItemCodeJsonConverter());
         services.AddKeyedSingleton<JsonSerializerOptions>(typeof(IHybridCacheSerializer<>), jsonSerializerOptions);
 
         services.AddHybridCache();

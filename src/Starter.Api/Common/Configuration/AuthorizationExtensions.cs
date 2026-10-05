@@ -10,11 +10,8 @@ public static class AuthorizationExtensions
         services
             .AddAuthorizationBuilder()
             .AddPolicy(
-                AuthorizationPolicies.CanManageReportingEntities,
-                policy => policy.RequireRole(ApplicationRoles.Admin))
-            .AddPolicy(
-                AuthorizationPolicies.CanCreateReportingPeriod,
-                policy => policy.RequireRole(ApplicationRoles.User, ApplicationRoles.Admin));
+                AuthorizationPolicies.CanManageSampleEntities,
+                policy => policy.RequireRole(ApplicationRoles.Admin));
                     
         return services;
     }

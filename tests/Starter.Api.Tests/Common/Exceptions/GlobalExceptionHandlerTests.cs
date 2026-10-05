@@ -5,7 +5,7 @@ using Starter.Api.Common.Authorization;
 using Starter.Api.Common.Exceptions;
 using Starter.Api.Common.Http;
 using Starter.Api.Tests.Setup;
-using Starter.Domain.ReportingEntities;
+using Starter.Domain.SampleItems;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -20,7 +20,7 @@ public sealed class GlobalExceptionHandlerTests(ApiFixture fixture) : ApiIntegra
     {
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/reporting-entities")
+            "/api/sample-entities")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
 
         request.Content = JsonContent.Create(new
@@ -38,7 +38,7 @@ public sealed class GlobalExceptionHandlerTests(ApiFixture fixture) : ApiIntegra
         Assert.NotNull(problemDetails);
         Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
         Assert.Equal(ProblemDetailsTitles.ValidationError, problemDetails.Title);
-        Assert.Equal(ReportingEntityCode.InvalidCodeMessage, problemDetails.Detail);
+        Assert.Equal(SampleItemCode.InvalidCodeMessage, problemDetails.Detail);
         Assert.True(problemDetails.Extensions.ContainsKey("traceId"));
     }
 

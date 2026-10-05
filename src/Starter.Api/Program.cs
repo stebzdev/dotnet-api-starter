@@ -2,9 +2,8 @@ using Starter.Api.Common.Authentication;
 using Starter.Api.Common.Configuration;
 using Starter.Api.Common.Exceptions;
 using Starter.Api.Common.Extensions;
-using Starter.Api.ReportingEntities.Create;
-using Starter.Api.ReportingEntities.GetById;
-using Starter.Api.ReportingPeriods.Create;
+using Starter.Api.SampleItems.Create;
+using Starter.Api.SampleItems.GetById;
 using Starter.Application;
 using Starter.Infrastructure;
 
@@ -44,8 +43,7 @@ app.UseHttpsRedirection();
 
 app.MapDefaultEndpoints();
 
-app.MapCreateReportingPeriod();
-app.MapCreateReportingEntity();
-app.MapGetReportingEntity();
+app.MapCreateSampleEntity();
+app.MapGetSampleEntity();
 
 await app.RunAsync();

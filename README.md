@@ -33,6 +33,9 @@ The starter aims to provide a practical foundation for .NET backend applications
 - Static analysis with SonarQube Cloud
 - GitHub Actions CI
 - Container image publication to GitHub Container Registry
+- Shared build configuration through `Directory.Build.props`
+- NuGet Central Package Management
+- Shared MSBuild configuration through `Directory.Packages.props`
 
 The project intentionally avoids introducing abstractions that do not provide a concrete benefit.
 
@@ -424,6 +427,42 @@ Test coverage is collected automatically and reported to SonarQube Cloud.
 
 Generated and orchestration-focused code such as migrations, AppHost and ServiceDefaults can be excluded from coverage metrics.
 
+## Shared build and package configuration
+
+The solution centralizes common build settings and NuGet package versions at repository level.
+
+### Directory.Build.props
+
+`Directory.Build.props` defines shared MSBuild configuration that is applied automatically to projects in the solution.
+
+It is used for cross-project build conventions such as:
+
+- compiler settings
+- nullable reference types
+- implicit usings
+- warnings treated as errors
+- common analysis and quality rules
+
+This avoids duplicating the same configuration across individual project files and helps keep build behaviour consistent throughout the solution.
+
+### Directory.Packages.props
+
+NuGet package versions are managed centrally through `Directory.Packages.props` using NuGet Central Package Management.
+
+Individual `.csproj` files declare only the packages they depend on:
+
+```xml
+<PackageReference Include="Microsoft.EntityFrameworkCore" />
+```
+
+while the corresponding version is defined once at repository level:
+
+```xml
+<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="..." />
+```
+
+This keeps dependency versions consistent across projects and makes package upgrades easier to review and maintain.
+
 ## Technology stack
 
 The starter currently uses:
@@ -452,7 +491,8 @@ The starter currently uses:
 - Docker
 - Docker Compose
 - GitHub Container Registry
-- Central Package Management
+- NuGet Central Package Management
+- Shared MSBuild configuration
 
 ## Running with .NET Aspire
 

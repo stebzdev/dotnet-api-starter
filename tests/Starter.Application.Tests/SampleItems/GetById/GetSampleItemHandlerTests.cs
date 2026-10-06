@@ -2,7 +2,6 @@
 using Starter.Application.SampleItems.GetById;
 using Starter.Application.Tests.Setup;
 using Starter.Domain.SampleItems;
-using Microsoft.EntityFrameworkCore;
 
 namespace Starter.Application.Tests.SampleItems.GetById;
 

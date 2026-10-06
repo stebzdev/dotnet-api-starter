@@ -61,7 +61,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
     }
 
-  /*  [Fact]
+    [Fact]
     public async Task CreateSampleItem_WithAdminRole_ShouldBeAccessible()
     {
         var request = new HttpRequestMessage(
@@ -97,5 +97,5 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
         var response = await _client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
-    }*/
+    }
 }

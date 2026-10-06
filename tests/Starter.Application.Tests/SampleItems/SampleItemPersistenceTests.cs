@@ -8,21 +8,21 @@ namespace Starter.Application.Tests.SampleItems;
 public class SampleItemPersistenceTests(PostgreSqlFixture fixture) : ApplicationIntegrationTest(fixture)
 {
     [Fact]
-    public async Task SampleEntity_ShouldBeMaterializedFromDatabase()
+    public async Task SampleItem_ShouldBeMaterializedFromDatabase()
     {
-        var entity = SampleItem.Create(
-            "Test Entity",
+        var item = SampleItem.Create(
+            "Test Item",
             new SampleItemCode("TEST"));
 
-        _dbContext.SampleItems.Add(entity);
+        _dbContext.SampleItems.Add(item);
         await _dbContext.SaveChangesAsync();
 
         _dbContext.ChangeTracker.Clear();
 
-        var persistedEntity = await _dbContext.SampleItems.SingleAsync(x => x.Id == entity.Id);
+        var persistedItem = await _dbContext.SampleItems.SingleAsync(x => x.Id == item.Id);
 
-        Assert.Equal(entity.Id, persistedEntity.Id);
-        Assert.Equal(entity.Name, persistedEntity.Name);
-        Assert.Equal(entity.Code, persistedEntity.Code);
+        Assert.Equal(item.Id, persistedItem.Id);
+        Assert.Equal(item.Name, persistedItem.Name);
+        Assert.Equal(item.Code, persistedItem.Code);
     }
 }

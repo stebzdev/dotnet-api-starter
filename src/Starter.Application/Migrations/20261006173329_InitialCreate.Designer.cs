@@ -12,7 +12,7 @@ using Starter.Application.Common.Persistence;
 namespace Starter.Application.Migrations
 {
     [DbContext(typeof(StarterDbContext))]
-    [Migration("20261005152200_InitialCreate")]
+    [Migration("20261006173329_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -45,7 +45,7 @@ namespace Starter.Application.Migrations
                     b.HasIndex("Code")
                         .IsUnique();
 
-                    b.ToTable("sample_entities", (string)null);
+                    b.ToTable("sample_items", (string)null);
                 });
 #pragma warning restore 612, 618
         }

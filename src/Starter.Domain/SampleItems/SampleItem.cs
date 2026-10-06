@@ -25,7 +25,7 @@ public sealed class SampleItem
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new DomainException("Sample entity name cannot be empty.");
+            throw new DomainException("Sample item name cannot be empty.");
         }
 
         return new SampleItem(SampleItemId.New(), name.Trim(), code);

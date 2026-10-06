@@ -14,7 +14,7 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
 
     [Theory]
     [InlineData("AFG", "Aurora Financial Group")]
-    public async Task Get_WithExistingEntity_ShouldReturnOk(string code, string name)
+    public async Task Get_WithExistingItem_ShouldReturnOk(string code, string name)
     {
         var createRequest = new HttpRequestMessage(
             HttpMethod.Post,
@@ -31,13 +31,13 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
 
         Assert.Equal(HttpStatusCode.Created, createResponse.StatusCode);
 
-        var createdEntity = await createResponse.Content.ReadFromJsonAsync<CreateSampleItemResponse>();
+        var createdItem = await createResponse.Content.ReadFromJsonAsync<CreateSampleItemResponse>();
 
-        Assert.NotNull(createdEntity);
+        Assert.NotNull(createdItem);
 
         var getRequest = new HttpRequestMessage(
             HttpMethod.Get,
-            $"/api/sample-items/{createdEntity.Id}")
+            $"/api/sample-items/{createdItem.Id}")
             .AuthenticateAsTestUser();
 
         var response = await _client.SendAsync(getRequest);
@@ -47,7 +47,7 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
         var result = await response.Content.ReadFromJsonAsync<GetSampleItemResponse>();
 
         Assert.NotNull(result);
-        Assert.Equal(createdEntity.Id, result.Id);
+        Assert.Equal(createdItem.Id, result.Id);
         Assert.Equal(name, result.Name);
         Assert.Equal(code, result.Code);
     }

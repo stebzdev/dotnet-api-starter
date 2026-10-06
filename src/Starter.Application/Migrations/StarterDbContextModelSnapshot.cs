@@ -42,7 +42,7 @@ namespace Starter.Application.Migrations
                     b.HasIndex("Code")
                         .IsUnique();
 
-                    b.ToTable("sample_entities", (string)null);
+                    b.ToTable("sample_items", (string)null);
                 });
 #pragma warning restore 612, 618
         }

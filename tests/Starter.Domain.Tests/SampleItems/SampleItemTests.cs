@@ -11,15 +11,15 @@ public sealed class SampleItemTests
     [Theory]
     [InlineData("Acme Bank", "ACME")]
     [InlineData("Global Finance", "GLOBAL")]
-    public void Create_ShouldCreateSampleEntity(string name, string codeValue)
+    public void Create_ShouldCreateSampleItem(string name, string codeValue)
     {
         var code = new SampleItemCode(codeValue);
 
-        var sampleEntity = SampleItem.Create(name, code);
+        var sampleItem = SampleItem.Create(name, code);
 
-        Assert.NotEqual(Guid.Empty, sampleEntity.Id.Value);
-        Assert.Equal(name, sampleEntity.Name);
-        Assert.Equal(code, sampleEntity.Code);
+        Assert.NotEqual(Guid.Empty, sampleItem.Id.Value);
+        Assert.Equal(name, sampleItem.Name);
+        Assert.Equal(code, sampleItem.Code);
     }
 
     [Theory]
@@ -41,8 +41,8 @@ public sealed class SampleItemTests
     {
         var code = new SampleItemCode("TEST");
 
-        var sampleEntity = SampleItem.Create(name, code);
+        var sampleItem = SampleItem.Create(name, code);
 
-        Assert.Equal(expected, sampleEntity.Name);
+        Assert.Equal(expected, sampleItem.Name);
     }
 }

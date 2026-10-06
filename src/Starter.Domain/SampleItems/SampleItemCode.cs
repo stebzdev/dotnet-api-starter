@@ -4,7 +4,7 @@ namespace Starter.Domain.SampleItems;
 
 public readonly record struct SampleItemCode
 {
-    public const string InvalidCodeMessage = "Entity code cannot be null or whitespace.";
+    public const string InvalidCodeMessage = "Item code cannot be null or whitespace.";
 
     public string Value { get; }
 

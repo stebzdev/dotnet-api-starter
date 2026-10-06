@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Starter.Application.Migrations
 {
     /// <inheritdoc />
-    public partial class AddReportingEntity : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "reporting_entities",
+                name: "sample_items",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -21,33 +21,21 @@ namespace Starter.Application.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_reporting_entities", x => x.Id);
+                    table.PrimaryKey("PK_sample_items", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_reporting_entities_Code",
-                table: "reporting_entities",
+                name: "IX_sample_items_Code",
+                table: "sample_items",
                 column: "Code",
                 unique: true);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_reporting_periods_reporting_entities_ReportingEntityId",
-                table: "reporting_periods",
-                column: "ReportingEntityId",
-                principalTable: "reporting_entities",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_reporting_periods_reporting_entities_ReportingEntityId",
-                table: "reporting_periods");
-
             migrationBuilder.DropTable(
-                name: "reporting_entities");
+                name: "sample_items");
         }
     }
 }

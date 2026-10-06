@@ -24,15 +24,15 @@ public sealed class CreateSampleItemHandler(
             return Result<CreateSampleItemResult>.Failure(SampleItemErrors.AlreadyExists);
         }
 
-        var sampleEntity = SampleItem.Create(command.Name, command.Code);
+        var sampleItem = SampleItem.Create(command.Name, command.Code);
 
-        dbContext.SampleItems.Add(sampleEntity);
+        dbContext.SampleItems.Add(sampleItem);
 
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        CreateSampleItemLog.Created(logger, sampleEntity.Id.Value, sampleEntity.Code.Value);
+        CreateSampleItemLog.Created(logger, sampleItem.Id.Value, sampleItem.Code.Value);
 
-        var response = new CreateSampleItemResult(sampleEntity.Id);
+        var response = new CreateSampleItemResult(sampleItem.Id);
 
         return Result<CreateSampleItemResult>.Success(response);
     }

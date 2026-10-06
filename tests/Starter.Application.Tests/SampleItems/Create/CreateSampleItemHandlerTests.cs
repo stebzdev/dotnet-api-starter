@@ -13,7 +13,7 @@ public sealed class CreateSampleItemHandlerTests(PostgreSqlFixture fixture) : Ap
     [Theory]
     [InlineData("Acme Bank", "ACME")]
     [InlineData("Global Finance", "GLOBAL")]
-    public async Task HandleAsync_ShouldPersistSampleEntity(string name, string codeValue)
+    public async Task HandleAsync_ShouldPersistSampleItem(string name, string codeValue)
     {
         var command = new CreateSampleItemCommand(name, new SampleItemCode(codeValue));
 
@@ -23,10 +23,10 @@ public sealed class CreateSampleItemHandlerTests(PostgreSqlFixture fixture) : Ap
 
         Assert.True(result.IsSuccess);
 
-        var sampleEntity = await _dbContext.SampleItems.SingleAsync(x => x.Id == result.Value.Id);
+        var sampleItem = await _dbContext.SampleItems.SingleAsync(x => x.Id == result.Value.Id);
 
-        Assert.Equal(name, sampleEntity.Name);
-        Assert.Equal(command.Code, sampleEntity.Code);
+        Assert.Equal(name, sampleItem.Name);
+        Assert.Equal(command.Code, sampleItem.Code);
     }
 
     [Theory]

@@ -6,7 +6,7 @@ namespace Starter.Api.SampleItems.GetById;
 
 public static class GetSampleItemEndpoint
 {
-    public static void MapGetSampleEntity(this IEndpointRouteBuilder app)
+    public static void MapGetSampleItem(this IEndpointRouteBuilder app)
     {
         app.MapGet(
             "/api/sample-items/{id:guid}",

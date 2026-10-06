@@ -8,7 +8,7 @@ public sealed class SampleItemCodeJsonConverter : JsonConverter<SampleItemCode>
 {
     public override SampleItemCode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        var value = reader.GetString() ?? throw new JsonException("Sample entity code cannot be null.");
+        var value = reader.GetString() ?? throw new JsonException("Sample item code cannot be null.");
 
         return new SampleItemCode(value);
     }

@@ -35,7 +35,8 @@ The starter aims to provide a practical foundation for .NET backend applications
 - Container image publication to GitHub Container Registry
 - Shared build configuration through `Directory.Build.props`
 - NuGet Central Package Management
-- Shared MSBuild configuration through `Directory.Packages.props`
+- Shared MSBuild configuration
+- EditorConfig through `Directory.Packages.props`
 
 The project intentionally avoids introducing abstractions that do not provide a concrete benefit.
 
@@ -427,7 +428,7 @@ Test coverage is collected automatically and reported to SonarQube Cloud.
 
 Generated and orchestration-focused code such as migrations, AppHost and ServiceDefaults can be excluded from coverage metrics.
 
-## Shared build and package configuration
+## Shared build, package and code style configuration
 
 The solution centralizes common build settings and NuGet package versions at repository level.
 
@@ -463,6 +464,23 @@ while the corresponding version is defined once at repository level:
 
 This keeps dependency versions consistent across projects and makes package upgrades easier to review and maintain.
 
+### .editorconfig
+
+The repository includes an `.editorconfig` file to keep formatting and code
+style rules consistent across editors and IDEs.
+
+It defines shared conventions for areas such as:
+
+- indentation and whitespace
+- C# language style
+- naming conventions
+- analyzer preferences
+- formatting rules
+
+This helps keep the codebase consistent independently of individual developer
+environment settings and complements the build-time quality rules defined in
+`Directory.Build.props`.
+
 ## Technology stack
 
 The starter currently uses:
@@ -493,6 +511,7 @@ The starter currently uses:
 - GitHub Container Registry
 - NuGet Central Package Management
 - Shared MSBuild configuration
+- EditorConfig
 
 ## Running with .NET Aspire
 

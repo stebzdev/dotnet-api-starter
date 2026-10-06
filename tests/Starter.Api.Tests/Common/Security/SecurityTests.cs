@@ -13,7 +13,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
     public async Task ProtectedEndpoint_WithoutAuthentication_ShouldReturnUnauthorized()
     {
         var response = await _client.PostAsJsonAsync(
-            "/api/sample-entities",
+            "/api/sample-items",
             new
             {
                 Name = "Aurora Financial Group",
@@ -28,7 +28,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
     {
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/sample-entities")
+            "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
 
         request.Content = JsonContent.Create(new
@@ -47,7 +47,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
     {
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/sample-entities")
+            "/api/sample-items")
             .AuthenticateAsTestUser();
 
         request.Content = JsonContent.Create(new

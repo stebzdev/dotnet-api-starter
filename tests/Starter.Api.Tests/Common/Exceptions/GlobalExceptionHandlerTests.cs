@@ -20,7 +20,7 @@ public sealed class GlobalExceptionHandlerTests(ApiFixture fixture) : ApiIntegra
     {
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/sample-entities")
+            "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
 
         request.Content = JsonContent.Create(new

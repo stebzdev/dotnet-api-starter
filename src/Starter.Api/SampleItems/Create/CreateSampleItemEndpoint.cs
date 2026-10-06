@@ -7,9 +7,9 @@ namespace Starter.Api.SampleItems.Create;
 
 public static class CreateSampleItemEndpoint
 {
-    public static void MapCreateSampleEntity(this IEndpointRouteBuilder app)
+    public static void MapCreateSampleItem(this IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/sample-entities", async ( CreateSampleItemRequest request, CreateSampleItemHandler handler, CancellationToken cancellationToken) =>
+        app.MapPost("/api/sample-items", async ( CreateSampleItemRequest request, CreateSampleItemHandler handler, CancellationToken cancellationToken) =>
         {
             var command = new CreateSampleItemCommand(request.Name, new SampleItemCode(request.Code));
 
@@ -22,10 +22,10 @@ public static class CreateSampleItemEndpoint
 
             var response = new CreateSampleItemResponse(result.Value.Id.Value);
 
-            return Results.Created($"/api/sample-entities/{response.Id}", response);
+            return Results.Created($"/api/sample-items/{response.Id}", response);
         })
-        .WithName("CreateSampleEntity")
-        .WithTags("SampleEntities")
-        .RequireAuthorization(AuthorizationPolicies.CanManageSampleEntities);
+        .WithName("CreateSampleItem")
+        .WithTags("SampleItems")
+        .RequireAuthorization(AuthorizationPolicies.CanManageSampleItems);
     }
 }

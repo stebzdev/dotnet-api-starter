@@ -10,7 +10,7 @@ public static class AuthorizationExtensions
         services
             .AddAuthorizationBuilder()
             .AddPolicy(
-                AuthorizationPolicies.CanManageSampleEntities,
+                AuthorizationPolicies.CanManageSampleItems,
                 policy => policy.RequireRole(ApplicationRoles.Admin));
                     
         return services;

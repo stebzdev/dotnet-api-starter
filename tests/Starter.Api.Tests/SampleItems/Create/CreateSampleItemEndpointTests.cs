@@ -14,7 +14,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
     {
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/sample-entities")
+            "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
 
         request.Content = JsonContent.Create(new
@@ -38,7 +38,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
     {
         var firstRequest = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/sample-entities")
+            "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
 
         firstRequest.Content = JsonContent.Create(new
@@ -53,7 +53,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
 
         var secondRequest = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/sample-entities")
+            "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
 
         secondRequest.Content = JsonContent.Create(new
@@ -72,7 +72,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
     {
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/sample-entities")
+            "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
 
         request.Content = JsonContent.Create(new

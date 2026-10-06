@@ -18,7 +18,7 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
     {
         var createRequest = new HttpRequestMessage(
             HttpMethod.Post,
-            "/api/sample-entities")
+            "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
 
         createRequest.Content = JsonContent.Create(new
@@ -37,7 +37,7 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
 
         var getRequest = new HttpRequestMessage(
             HttpMethod.Get,
-            $"/api/sample-entities/{createdEntity.Id}")
+            $"/api/sample-items/{createdEntity.Id}")
             .AuthenticateAsTestUser();
 
         var response = await _client.SendAsync(getRequest);
@@ -59,7 +59,7 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
 
         var request = new HttpRequestMessage(
             HttpMethod.Get,
-            $"/api/sample-entities/{id}")
+            $"/api/sample-items/{id}")
             .AuthenticateAsTestUser();
 
         var response = await _client.SendAsync(request);
@@ -72,7 +72,7 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
     {
         var id = Guid.NewGuid();
 
-        var response = await _client.GetAsync($"/api/sample-entities/{id}");
+        var response = await _client.GetAsync($"/api/sample-items/{id}");
 
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }

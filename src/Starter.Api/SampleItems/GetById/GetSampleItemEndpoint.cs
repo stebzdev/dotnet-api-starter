@@ -9,7 +9,7 @@ public static class GetSampleItemEndpoint
     public static void MapGetSampleEntity(this IEndpointRouteBuilder app)
     {
         app.MapGet(
-            "/api/sample-entities/{id:guid}",
+            "/api/sample-items/{id:guid}",
             async (
                 Guid id,
                 GetSampleItemHandler handler,
@@ -31,8 +31,8 @@ public static class GetSampleItemEndpoint
 
                 return Results.Ok(response);
             })
-            .WithName("GetSampleEntity")
-            .WithTags("SampleEntities")
+            .WithName("GetSampleItem")
+            .WithTags("SampleItems")
             .RequireAuthorization();
     }
 }

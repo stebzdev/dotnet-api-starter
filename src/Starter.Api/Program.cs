@@ -43,7 +43,7 @@ app.UseHttpsRedirection();
 
 app.MapDefaultEndpoints();
 
-app.MapCreateSampleEntity();
-app.MapGetSampleEntity();
+app.MapCreateSampleItem();
+app.MapGetSampleItem();
 
 await app.RunAsync();

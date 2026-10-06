@@ -8,7 +8,7 @@ internal sealed class SampleItemConfiguration : IEntityTypeConfiguration<SampleI
 {
     public void Configure(EntityTypeBuilder<SampleItem> builder)
     {
-        builder.ToTable("sample_entities");
+        builder.ToTable("sample_items");
 
         builder.HasKey(x => x.Id);
 

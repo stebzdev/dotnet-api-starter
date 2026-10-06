@@ -1,8 +1,8 @@
 @Starter.Api_HostAddress = https://localhost:7055
 
-### Create sample entity
+### Create sample items
 
-POST {{Starter.Api_HostAddress}}/api/sample-entities
+POST {{Starter.Api_HostAddress}}/api/sample-items
 Content-Type: application/json
 
 {

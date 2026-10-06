@@ -2,5 +2,5 @@
 
 public static class AuthorizationPolicies
 {
-    public const string CanManageSampleEntities = "CanManageSampleEntities";
+    public const string CanManageSampleItems = "CanManageSampleItems";
 }

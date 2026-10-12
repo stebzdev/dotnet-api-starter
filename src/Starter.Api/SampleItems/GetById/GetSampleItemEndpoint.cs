@@ -4,7 +4,7 @@ using Starter.Domain.SampleItems;
 
 namespace Starter.Api.SampleItems.GetById;
 
-public static class GetSampleItemEndpoint
+internal static class GetSampleItemEndpoint
 {
     public static void MapGetSampleItem(this IEndpointRouteBuilder app)
     {

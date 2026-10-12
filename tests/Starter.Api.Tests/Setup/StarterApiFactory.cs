@@ -18,7 +18,7 @@ public sealed class StarterApiFactory(PostgreSqlFixture postgresFixture) : WebAp
         builder.ConfigureAppConfiguration((_, configuration) =>
         {
             configuration.AddInMemoryCollection(
-                new Dictionary<string, string?>
+                new Dictionary<string, string?>(StringComparer.Ordinal)
                 {
                     ["ConnectionStrings:StarterDb"] = postgresFixture.ConnectionString
                 });

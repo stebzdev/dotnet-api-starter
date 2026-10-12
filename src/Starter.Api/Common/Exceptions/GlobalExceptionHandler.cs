@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Starter.Api.Common.Exceptions;
 
-public sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
+internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
@@ -29,17 +29,11 @@ public sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logge
 
         if (exception is DomainException)
         {
-            logger.LogWarning(
-                exception,
-                "Domain validation error. TraceId: {TraceId}",
-                httpContext.TraceIdentifier);
+            GlobalExceptionHandlerLog.LogDomainValidationError(logger, exception, httpContext.TraceIdentifier);
         }
         else
         {
-            logger.LogError(
-                exception,
-                "Unhandled exception. TraceId: {TraceId}",
-                httpContext.TraceIdentifier);
+            GlobalExceptionHandlerLog.LogUnhandledException(logger, exception, httpContext.TraceIdentifier);
         }
 
         httpContext.Response.StatusCode = problemDetails.Status!.Value;

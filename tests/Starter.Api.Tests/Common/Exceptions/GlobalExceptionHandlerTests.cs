@@ -18,7 +18,7 @@ public sealed class GlobalExceptionHandlerTests(ApiFixture fixture) : ApiIntegra
     [Fact]
     public async Task DomainException_ShouldReturnBadRequest()
     {
-        var request = new HttpRequestMessage(
+        using var request = new HttpRequestMessage(
             HttpMethod.Post,
             "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
@@ -29,7 +29,7 @@ public sealed class GlobalExceptionHandlerTests(ApiFixture fixture) : ApiIntegra
             Code = ""
         });
 
-        var response = await _client.SendAsync(request);
+        using var response = await Client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 
@@ -71,7 +71,7 @@ public sealed class GlobalExceptionHandlerTests(ApiFixture fixture) : ApiIntegra
         Assert.Equal(ProblemDetailsTitles.UnexpectedError, root.GetProperty("title").GetString());
         Assert.Equal(StatusCodes.Status500InternalServerError, root.GetProperty("status").GetInt32());
         Assert.Equal("test-trace-id", root.GetProperty("traceId").GetString());
-        Assert.DoesNotContain("Sensitive database information", root.GetRawText());
-        Assert.DoesNotContain("InvalidOperationException", root.GetRawText());
+        Assert.DoesNotContain("Sensitive database information", root.GetRawText(), StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("InvalidOperationException", root.GetRawText(), StringComparison.OrdinalIgnoreCase);
     }
 }

@@ -17,13 +17,13 @@ public sealed class CreateSampleItemHandlerTests(PostgreSqlFixture fixture) : Ap
     {
         var command = new CreateSampleItemCommand(name, new SampleItemCode(codeValue));
 
-        var handler = new CreateSampleItemHandler(_dbContext, NullLogger<CreateSampleItemHandler>.Instance);
+        var handler = new CreateSampleItemHandler(DbContext, NullLogger<CreateSampleItemHandler>.Instance);
 
         var result = await handler.HandleAsync(command, CancellationToken.None);
 
         Assert.True(result.IsSuccess);
 
-        var sampleItem = await _dbContext.SampleItems.SingleAsync(x => x.Id == result.Value.Id);
+        var sampleItem = await DbContext.SampleItems.SingleAsync(x => x.Id == result.Value.Id);
 
         Assert.Equal(name, sampleItem.Name);
         Assert.Equal(command.Code, sampleItem.Code);
@@ -36,7 +36,7 @@ public sealed class CreateSampleItemHandlerTests(PostgreSqlFixture fixture) : Ap
     {
         var command = new CreateSampleItemCommand(name, new SampleItemCode(codeValue));
 
-        var handler = new CreateSampleItemHandler(_dbContext, NullLogger<CreateSampleItemHandler>.Instance);
+        var handler = new CreateSampleItemHandler(DbContext, NullLogger<CreateSampleItemHandler>.Instance);
 
         var firstResult = await handler.HandleAsync(command, CancellationToken.None);
         var secondResult = await handler.HandleAsync(command, CancellationToken.None);

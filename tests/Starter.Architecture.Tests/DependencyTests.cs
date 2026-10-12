@@ -34,15 +34,15 @@ public sealed class DependencyTests
         Assert.True(result.IsSuccessful);
     }
 
-    /*  [Fact]
-       public void Infrastructure_ShouldNotDependOnApi()
-       {
-           var result = Types
-               .InAssembly(TestAssemblies.InfrastructureAssembly)
-               .ShouldNot()
-               .HaveDependencyOn("Starter.Api")
-               .GetResult();
+    [Fact]
+    public void Infrastructure_ShouldNotDependOnApi()
+    {
+        var result = Types
+            .InAssembly(TestAssemblies.Infrastructure)
+            .ShouldNot()
+            .HaveDependencyOn("Starter.Api")
+            .GetResult();
 
-           Assert.True(result.IsSuccessful);
-       }*/
+        Assert.True(result.IsSuccessful);
+    }
 }

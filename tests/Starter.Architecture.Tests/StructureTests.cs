@@ -12,7 +12,7 @@ public sealed class StructureTests
         var result = Types
             .InAssembly(TestAssemblies.Application)
             .That()
-            .HaveNameEndingWith("Handler")
+            .HaveNameEndingWith("Handler", StringComparison.Ordinal)
             .Should()
             .BeSealed()
             .GetResult();
@@ -82,19 +82,19 @@ public sealed class StructureTests
             invalidTypes.Length == 0,
             $"The following types have an invalid namespace:{Environment.NewLine}" + string.Join(Environment.NewLine, invalidTypes.Select(type => type.FullName)));
     }
-}
 
-internal static class ArchitectureAssert
-{
-    internal static void IsSuccessful(TestResult result)
+    internal static class ArchitectureAssert
     {
-        if (result.IsSuccessful)
+        internal static void IsSuccessful(TestResult result)
         {
-            return;
-        }
+            if (result.IsSuccessful)
+            {
+                return;
+            }
 
-        Assert.Fail(
-            $"The following types violate the architecture rule:{Environment.NewLine}" +
-            string.Join(Environment.NewLine, result.FailingTypes.Select(x => x.FullName)));
+            Assert.Fail(
+                $"The following types violate the architecture rule:{Environment.NewLine}" +
+                string.Join(Environment.NewLine, result.FailingTypes.Select(x => x.FullName)));
+        }
     }
 }

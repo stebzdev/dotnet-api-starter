@@ -14,7 +14,7 @@ public sealed class NamingConventionTests
             .That()
             .AreInterfaces()
             .Should()
-            .HaveNameStartingWith("I")
+            .HaveNameStartingWith("I", StringComparison.Ordinal)
             .GetResult();
 
         Assert.True(result.IsSuccessful);
@@ -28,7 +28,7 @@ public sealed class NamingConventionTests
             .That()
             .ImplementInterface(typeof(ICommand<>))
             .Should()
-            .HaveNameEndingWith("Command")
+            .HaveNameEndingWith("Command", StringComparison.Ordinal)
             .GetResult();
 
         Assert.True(result.IsSuccessful);
@@ -42,7 +42,7 @@ public sealed class NamingConventionTests
             .That()
             .ImplementInterface(typeof(IQuery<>))
             .Should()
-            .HaveNameEndingWith("Query")
+            .HaveNameEndingWith("Query", StringComparison.Ordinal)
             .GetResult();
 
         Assert.True(result.IsSuccessful);
@@ -56,7 +56,7 @@ public sealed class NamingConventionTests
             .That()
             .ImplementInterface(typeof(ICommandHandler<,>))
             .Should()
-            .HaveNameEndingWith("Handler")
+            .HaveNameEndingWith("Handler", StringComparison.Ordinal)
             .GetResult();
 
         Assert.True(result.IsSuccessful);
@@ -70,7 +70,7 @@ public sealed class NamingConventionTests
             .That()
             .ImplementInterface(typeof(IQueryHandler<,>))
             .Should()
-            .HaveNameEndingWith("Handler")
+            .HaveNameEndingWith("Handler", StringComparison.Ordinal)
             .GetResult();
 
         Assert.True(result.IsSuccessful);

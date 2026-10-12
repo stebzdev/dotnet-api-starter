@@ -8,9 +8,9 @@ namespace Starter.Architecture.Tests.Setup;
 internal static class TestAssemblies
 {
     internal static readonly Assembly Domain = typeof(Domain.SampleItems.SampleItem).Assembly;
-    internal static readonly Assembly Application = typeof(Application.DependencyInjection).Assembly;
+    internal static readonly Assembly Application = typeof(Application.ApplicationServiceCollectionExtensions).Assembly;
     internal static readonly Assembly Api = typeof(Api.SampleItems.Create.CreateSampleItemEndpoint).Assembly;
-  //  internal static readonly Assembly Infrastructure = typeof(Infrastructure.DependencyInjection).Assembly;
+    internal static readonly Assembly Infrastructure = typeof(Infrastructure.InfrastructureServiceCollectionExtensions).Assembly;
 
 
     internal static readonly Assembly[] All =
@@ -18,7 +18,7 @@ internal static class TestAssemblies
         TestAssemblies.Domain,
         TestAssemblies.Application,
         TestAssemblies.Api,
-      //  TestAssemblies.Infrastructure
+        TestAssemblies.Infrastructure
     ];
 
     internal static bool IsGeneratedFrameworkType(Type type)

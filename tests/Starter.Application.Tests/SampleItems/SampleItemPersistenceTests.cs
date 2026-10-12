@@ -14,12 +14,12 @@ public class SampleItemPersistenceTests(PostgreSqlFixture fixture) : Application
             "Test Item",
             new SampleItemCode("TEST"));
 
-        _dbContext.SampleItems.Add(item);
-        await _dbContext.SaveChangesAsync();
+        DbContext.SampleItems.Add(item);
+        await DbContext.SaveChangesAsync();
 
-        _dbContext.ChangeTracker.Clear();
+        DbContext.ChangeTracker.Clear();
 
-        var persistedItem = await _dbContext.SampleItems.SingleAsync(x => x.Id == item.Id);
+        var persistedItem = await DbContext.SampleItems.SingleAsync(x => x.Id == item.Id);
 
         Assert.Equal(item.Id, persistedItem.Id);
         Assert.Equal(item.Name, persistedItem.Name);

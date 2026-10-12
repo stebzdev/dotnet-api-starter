@@ -2,7 +2,7 @@
 
 namespace Starter.Api.Common.Authentication;
 
-public static class AuthenticationExtensions
+internal static class AuthenticationExtensions
 {
     public static IServiceCollection AddStarterAuthentication(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
     {

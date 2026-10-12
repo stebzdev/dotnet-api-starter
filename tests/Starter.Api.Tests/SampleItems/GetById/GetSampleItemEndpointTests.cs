@@ -10,13 +10,11 @@ namespace Starter.Api.Tests.SampleItems.GetById;
 [Collection(ApiTestCollection.Name)]
 public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrationTest(fixture)
 {
-    private readonly ApiFixture _fixture = fixture ?? throw new ArgumentNullException(nameof(fixture));
-
     [Theory]
     [InlineData("AFG", "Aurora Financial Group")]
     public async Task Get_WithExistingItem_ShouldReturnOk(string code, string name)
     {
-        var createRequest = new HttpRequestMessage(
+        using var createRequest = new HttpRequestMessage(
             HttpMethod.Post,
             "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
@@ -27,7 +25,7 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
             Code = code
         });
 
-        var createResponse = await _client.SendAsync(createRequest);
+        using var createResponse = await Client.SendAsync(createRequest);
 
         Assert.Equal(HttpStatusCode.Created, createResponse.StatusCode);
 
@@ -35,12 +33,12 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
 
         Assert.NotNull(createdItem);
 
-        var getRequest = new HttpRequestMessage(
+        using var getRequest = new HttpRequestMessage(
             HttpMethod.Get,
             $"/api/sample-items/{createdItem.Id}")
             .AuthenticateAsTestUser();
 
-        var response = await _client.SendAsync(getRequest);
+        using var response = await Client.SendAsync(getRequest);
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -57,12 +55,12 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
     {
         var id = Guid.NewGuid();
 
-        var request = new HttpRequestMessage(
+        using var request = new HttpRequestMessage(
             HttpMethod.Get,
             $"/api/sample-items/{id}")
             .AuthenticateAsTestUser();
 
-        var response = await _client.SendAsync(request);
+        using var response = await Client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
@@ -72,7 +70,7 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
     {
         var id = Guid.NewGuid();
 
-        var response = await _client.GetAsync($"/api/sample-items/{id}");
+        var response = await Client.GetAsync(new Uri($"/api/sample-items/{id}", UriKind.Relative));
 
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }

@@ -12,7 +12,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
     [Fact]
     public async Task Create_WithValidRequest_ShouldReturnCreated()
     {
-        var request = new HttpRequestMessage(
+        using var request = new HttpRequestMessage(
             HttpMethod.Post,
             "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
@@ -23,7 +23,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
             Code = "AFG"
         });
 
-        var response = await _client.SendAsync(request);
+        using var response = await Client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
@@ -36,7 +36,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
     [Fact]
     public async Task Create_WithDuplicateCode_ShouldReturnConflict()
     {
-        var firstRequest = new HttpRequestMessage(
+        using var firstRequest = new HttpRequestMessage(
             HttpMethod.Post,
             "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
@@ -47,11 +47,11 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
             Code = "AFG"
         });
 
-        var firstResponse = await _client.SendAsync(firstRequest);
+        using var firstResponse = await Client.SendAsync(firstRequest);
 
         Assert.Equal(HttpStatusCode.Created, firstResponse.StatusCode);
 
-        var secondRequest = new HttpRequestMessage(
+        using var secondRequest = new HttpRequestMessage(
             HttpMethod.Post,
             "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
@@ -62,7 +62,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
             Code = "AFG"
         });
 
-        var response = await _client.SendAsync(secondRequest);
+        using var response = await Client.SendAsync(secondRequest);
 
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
     }
@@ -70,7 +70,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
     [Fact]
     public async Task Create_WithInvalidCode_ShouldReturnBadRequest()
     {
-        var request = new HttpRequestMessage(
+        using var request = new HttpRequestMessage(
             HttpMethod.Post,
             "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
@@ -81,7 +81,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
             Code = " "
         });
 
-        var response = await _client.SendAsync(request);
+        using var response = await Client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }

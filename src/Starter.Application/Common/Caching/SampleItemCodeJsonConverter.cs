@@ -15,6 +15,6 @@ public sealed class SampleItemCodeJsonConverter : JsonConverter<SampleItemCode>
 
     public override void Write( Utf8JsonWriter writer, SampleItemCode value, JsonSerializerOptions options)
     {
-        writer.WriteStringValue(value.Value);
+        writer?.WriteStringValue(value.Value);
     }
 }

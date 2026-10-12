@@ -38,11 +38,3 @@ public sealed class TestAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions>
         return Task.FromResult(AuthenticateResult.Success(ticket));
     }
 }
-
-internal static class TestAuthDefaults
-{
-    internal const string AuthenticationScheme = "Test";
-    internal const string UserHeader = "X-Test-User";
-    internal const string RolesHeader = "X-Test-Roles";
-    internal const string UserName = "test-user";
-}

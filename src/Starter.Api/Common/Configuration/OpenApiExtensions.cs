@@ -3,7 +3,7 @@ using Scalar.AspNetCore;
 
 namespace Starter.Api.Common.Extensions;
 
-public static class OpenApiExtensions
+internal static class OpenApiExtensions
 {
     public static IServiceCollection AddStarterOpenApi(this IServiceCollection services)
     {

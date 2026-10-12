@@ -9,6 +9,8 @@ public sealed class StarterDbContext(DbContextOptions<StarterDbContext> options)
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        ArgumentNullException.ThrowIfNull(modelBuilder);
+
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(StarterDbContext).Assembly);
 
         base.OnModelCreating(modelBuilder);

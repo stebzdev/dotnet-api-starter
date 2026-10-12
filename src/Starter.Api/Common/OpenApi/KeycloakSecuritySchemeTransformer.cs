@@ -3,7 +3,7 @@ using Microsoft.OpenApi;
 
 namespace Starter.Api.Common.OpenApi;
 
-public sealed class KeycloakSecuritySchemeTransformer(IConfiguration configuration) : IOpenApiDocumentTransformer
+internal sealed class KeycloakSecuritySchemeTransformer(IConfiguration configuration) : IOpenApiDocumentTransformer
 {
     public const string SchemeName = "OpenIdConnect";
 
@@ -17,7 +17,7 @@ public sealed class KeycloakSecuritySchemeTransformer(IConfiguration configurati
 
         document.Components ??= new OpenApiComponents();
 
-        document.Components.SecuritySchemes = new Dictionary<string, IOpenApiSecurityScheme>
+        document.Components.SecuritySchemes = new Dictionary<string, IOpenApiSecurityScheme>(StringComparer.Ordinal)
         {
             [SchemeName] = new OpenApiSecurityScheme
             {

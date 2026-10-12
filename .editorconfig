@@ -247,3 +247,53 @@ dotnet_naming_style.begins_with_i.required_prefix = I
 dotnet_naming_style.begins_with_i.required_suffix = 
 dotnet_naming_style.begins_with_i.word_separator = 
 dotnet_naming_style.begins_with_i.capitalization = pascal_case
+
+
+# =========================
+# Analyzer exceptions
+# =========================
+
+dotnet_diagnostic.CA1000.severity = none   # Do not declare static members on generic types
+dotnet_diagnostic.CA1040.severity = none   # Marker interfaces are intentionally used for commands and queries
+dotnet_diagnostic.CA1716.severity = none   # Identifiers should not match reserved language keywords
+dotnet_diagnostic.CA2007.severity = none   # ConfigureAwait is generally unnecessary in ASP.NET Core application code
+
+dotnet_diagnostic.MA0004.severity = none   # ConfigureAwait(false) is generally unnecessary in ASP.NET Core application code
+dotnet_diagnostic.MA0008.severity = none   # StructLayout is unnecessary for managed-only domain value objects
+dotnet_diagnostic.S2326.severity = none   # Generic marker interfaces use the response type as metadata
+
+# API request models
+[**/*Request.cs]
+dotnet_diagnostic.CA1812.severity = none   # ASP.NET Core model binding creates request types
+
+# Aspire AppHost entry point
+[src/Starter.AppHost/AppHost.cs]
+dotnet_diagnostic.MA0048.severity = none   # Program uses top-level statements in the Aspire AppHost
+
+# Exception handlers
+[**/Exceptions/*.cs]
+dotnet_diagnostic.CA1812.severity = none   # Registered and instantiated through dependency injection
+
+# OpenAPI infrastructure
+[**/OpenApi/*.cs]
+dotnet_diagnostic.CA1812.severity = none   # OpenAPI components are instantiated through dependency injection
+
+# EF Core configurations
+[**/Configurations/*.cs]
+dotnet_diagnostic.CA1062.severity = none   # EF Core supplies non-null framework arguments
+dotnet_diagnostic.CA1812.severity = none   # EF Core instantiates configuration types via reflection
+
+# EF Core generated migrations
+[**/Migrations/*.cs]
+generated_code = true
+dotnet_diagnostic.IDE0161.severity = none  # Convert to file-scoped namespace
+dotnet_diagnostic.CA1861.severity = none   # Avoid constant arrays as arguments
+
+
+# Test-specific analyzer exceptions
+[tests/**/*.cs]
+dotnet_diagnostic.CA1001.severity = none   # Test lifecycle handles disposal through xUnit
+dotnet_diagnostic.CA1062.severity = none   # Test framework supplies non-null infrastructure arguments
+dotnet_diagnostic.CA1515.severity = none   # xUnit requires some infrastructure types to be public
+dotnet_diagnostic.CA1707.severity = none   # Underscores are intentionally used in test method names
+dotnet_diagnostic.CA1711.severity = none   # "Collection" is valid terminology for xUnit test collections

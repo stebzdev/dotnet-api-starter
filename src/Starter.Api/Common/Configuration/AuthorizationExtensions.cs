@@ -2,7 +2,7 @@
 
 namespace Starter.Api.Common.Configuration;
 
-public static class AuthorizationExtensions
+internal static class AuthorizationExtensions
 {
     public static IServiceCollection AddStarterAuthorization(
         this IServiceCollection services)

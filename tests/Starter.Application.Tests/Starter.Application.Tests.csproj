@@ -15,6 +15,12 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" />    
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="xunit.analyzers" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Starter.Application.Tests" />
+    <InternalsVisibleTo Include="Starter.Architecture.Tests" />
   </ItemGroup>
 
   <ItemGroup>

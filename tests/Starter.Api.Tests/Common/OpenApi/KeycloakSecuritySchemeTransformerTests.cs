@@ -12,7 +12,7 @@ public sealed class KeycloakSecuritySchemeTransformerTests
     public async Task TransformAsync_WhenConfigurationIsValid_ShouldAddOpenIdConnectSecurityScheme()
     {
         var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
+            .AddInMemoryCollection(new Dictionary<string, string?>(StringComparer.Ordinal)
             {
                 ["Keycloak:Authority"] = "https://localhost:8080/",
                 ["Keycloak:Realm"] = "Starter"
@@ -42,7 +42,7 @@ public sealed class KeycloakSecuritySchemeTransformerTests
     public async Task TransformAsync_WhenAuthorityIsMissing_ShouldThrowInvalidOperationException()
     {
         var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
+            .AddInMemoryCollection(new Dictionary<string, string?>(StringComparer.Ordinal)
             {
                 ["Keycloak:Realm"] = "Starter"
             })
@@ -65,7 +65,7 @@ public sealed class KeycloakSecuritySchemeTransformerTests
     public async Task TransformAsync_WhenRealmIsMissing_ShouldThrowInvalidOperationException()
     {
         var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
+            .AddInMemoryCollection(new Dictionary<string, string?>(StringComparer.Ordinal)
             {
                 ["Keycloak:Authority"] = "https://localhost:8080/"
             })

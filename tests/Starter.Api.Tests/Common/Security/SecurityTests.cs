@@ -12,7 +12,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
     [Fact]
     public async Task ProtectedEndpoint_WithoutAuthentication_ShouldReturnUnauthorized()
     {
-        var response = await _client.PostAsJsonAsync(
+        var response = await Client.PostAsJsonAsync(
             "/api/sample-items",
             new
             {
@@ -26,7 +26,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
     [Fact]
     public async Task ProtectedEndpoint_WithRequiredRole_ShouldBeAccessible()
     {
-        var request = new HttpRequestMessage(
+        using var request = new HttpRequestMessage(
             HttpMethod.Post,
             "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
@@ -37,7 +37,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
             Code = "AUTH-TEST"
         });
 
-        var response = await _client.SendAsync(request);
+        using var response = await Client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
     }
@@ -45,7 +45,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
     [Fact]
     public async Task AdminEndpoint_WithoutRequiredRole_ShouldReturnForbidden()
     {
-        var request = new HttpRequestMessage(
+        using var request = new HttpRequestMessage(
             HttpMethod.Post,
             "/api/sample-items")
             .AuthenticateAsTestUser();
@@ -56,7 +56,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
             Code = "AUTH-TEST"
         });
 
-        var response = await _client.SendAsync(request);
+        var response = await Client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
     }
@@ -64,7 +64,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
     [Fact]
     public async Task CreateSampleItem_WithAdminRole_ShouldBeAccessible()
     {
-        var request = new HttpRequestMessage(
+        using var request = new HttpRequestMessage(
             HttpMethod.Post,
             "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.Admin);
@@ -75,7 +75,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
             Code = "AUTH-001"
         });
 
-        var response = await _client.SendAsync(request);
+        using var response = await Client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
     }
@@ -83,7 +83,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
     [Fact]
     public async Task CreateSampleItem_WithUserRole_ShouldReturnForbidden()
     {
-        var request = new HttpRequestMessage(
+        using var request = new HttpRequestMessage(
             HttpMethod.Post,
             "/api/sample-items")
             .AuthenticateAsTestUser(ApplicationRoles.User);
@@ -94,7 +94,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
             Code = "AUTH-002"
         });
 
-        var response = await _client.SendAsync(request);
+        using var response = await Client.SendAsync(request);
 
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
     }

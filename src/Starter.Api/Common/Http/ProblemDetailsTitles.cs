@@ -1,6 +1,6 @@
 ﻿namespace Starter.Api.Common.Http;
 
-public static class ProblemDetailsTitles
+internal static class ProblemDetailsTitles
 {
     public const string ValidationError = "Validation error";
 

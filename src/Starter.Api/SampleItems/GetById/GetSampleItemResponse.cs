@@ -1,6 +1,6 @@
 ﻿namespace Starter.Api.SampleItems.GetById;
 
-public sealed record GetSampleItemResponse(
+internal sealed record GetSampleItemResponse(
     Guid Id,
     string Name,
     string Code);

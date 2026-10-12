@@ -14,12 +14,12 @@ public sealed class GetSampleItemHandlerTests(PostgreSqlFixture fixture, HybridC
     {
         var item = SampleItem.Create(name, new SampleItemCode(code));
 
-        _dbContext.SampleItems.Add(item);
-        await _dbContext.SaveChangesAsync();
+        DbContext.SampleItems.Add(item);
+        await DbContext.SaveChangesAsync();
 
         var cache = cacheFixture.Cache;
 
-        var handler = new GetSampleItemHandler(_dbContext, cache);
+        var handler = new GetSampleItemHandler(DbContext, cache);
 
         var query = new GetSampleItemQuery(item.Id);
 
@@ -36,7 +36,7 @@ public sealed class GetSampleItemHandlerTests(PostgreSqlFixture fixture, HybridC
     {
         var cache = cacheFixture.Cache;
 
-        var handler = new GetSampleItemHandler(_dbContext, cache);
+        var handler = new GetSampleItemHandler(DbContext, cache);
 
         var query = new GetSampleItemQuery(SampleItemId.New());
 
@@ -52,18 +52,18 @@ public sealed class GetSampleItemHandlerTests(PostgreSqlFixture fixture, HybridC
     {
         var item = SampleItem.Create(name, new SampleItemCode(code));
 
-        _dbContext.SampleItems.Add(item);
-        await _dbContext.SaveChangesAsync();
+        DbContext.SampleItems.Add(item);
+        await DbContext.SaveChangesAsync();
 
         var cache = cacheFixture.Cache;
 
-        var handler = new GetSampleItemHandler(_dbContext, cache);
+        var handler = new GetSampleItemHandler(DbContext, cache);
         var query = new GetSampleItemQuery(item.Id);
 
         var firstResult = await handler.HandleAsync(query, CancellationToken.None);
 
-        _dbContext.SampleItems.Remove(item);
-        await _dbContext.SaveChangesAsync();
+        DbContext.SampleItems.Remove(item);
+        await DbContext.SaveChangesAsync();
 
         var secondResult = await handler.HandleAsync(query, CancellationToken.None);
 

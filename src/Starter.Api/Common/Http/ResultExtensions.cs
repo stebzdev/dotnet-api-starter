@@ -3,7 +3,7 @@ using HttpResults = Microsoft.AspNetCore.Http.Results;
 
 namespace Starter.Api.Common.Http;
 
-public static class ResultExtensions
+internal static class ResultExtensions
 {
     public static IResult ToProblem(this Error error) => error.Type switch
     {

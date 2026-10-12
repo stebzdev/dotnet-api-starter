@@ -1,9 +1,10 @@
-﻿using Starter.Application.Common.CQRS;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Starter.Application.Common.CQRS;
 using Starter.Application.Common.Persistence;
 using Starter.Application.Common.Results;
 using Starter.Domain.SampleItems;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Starter.Application.SampleItems.Create;
 
@@ -13,6 +14,8 @@ public sealed class CreateSampleItemHandler(
 {
     public async Task<Result<CreateSampleItemResult>> HandleAsync(CreateSampleItemCommand command, CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(command);
+
         var alreadyExists = await dbContext.SampleItems.AnyAsync(
             x => x.Code == command.Code,
             cancellationToken);

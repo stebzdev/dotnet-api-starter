@@ -1,6 +1,6 @@
 ﻿namespace Starter.Api.Common.Authorization;
 
-public static class AuthorizationPolicies
+internal static class AuthorizationPolicies
 {
     public const string CanManageSampleItems = "CanManageSampleItems";
 }

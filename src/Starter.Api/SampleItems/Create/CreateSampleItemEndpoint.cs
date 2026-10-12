@@ -5,7 +5,7 @@ using Starter.Domain.SampleItems;
 
 namespace Starter.Api.SampleItems.Create;
 
-public static class CreateSampleItemEndpoint
+internal static class CreateSampleItemEndpoint
 {
     public static void MapCreateSampleItem(this IEndpointRouteBuilder app)
     {

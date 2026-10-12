@@ -9,6 +9,8 @@ public sealed class GetSampleItemHandler(StarterDbContext dbContext, HybridCache
 {
     public async Task<Result<GetSampleItemResult>> HandleAsync(GetSampleItemQuery query, CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(query);
+
         var result = await cache.GetOrCreateAsync(
             $"sample-item:{query.Id.Value}",
             async cancellationToken =>

@@ -20,4 +20,9 @@
     <ProjectReference Include="..\Starter.ServiceDefaults\Starter.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Starter.Api.Tests" />
+    <InternalsVisibleTo Include="Starter.Architecture.Tests" />
+  </ItemGroup>
+
 </Project>

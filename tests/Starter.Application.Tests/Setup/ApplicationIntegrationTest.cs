@@ -6,7 +6,7 @@ public abstract class ApplicationIntegrationTest : IAsyncLifetime
 {
     private readonly PostgreSqlFixture _fixture;
 
-    protected readonly StarterDbContext _dbContext;
+    protected  StarterDbContext DbContext { get; }
 
     protected ApplicationIntegrationTest(PostgreSqlFixture fixture)
     {
@@ -16,7 +16,7 @@ public abstract class ApplicationIntegrationTest : IAsyncLifetime
             .UseNpgsql(fixture.ConnectionString)
             .Options;
 
-        _dbContext = new StarterDbContext(options);
+        DbContext = new StarterDbContext(options);
     }
 
     public async Task InitializeAsync()
@@ -26,6 +26,6 @@ public abstract class ApplicationIntegrationTest : IAsyncLifetime
 
     public async Task DisposeAsync()
     {
-        await _dbContext.DisposeAsync();
+        await DbContext.DisposeAsync();
     }
 }

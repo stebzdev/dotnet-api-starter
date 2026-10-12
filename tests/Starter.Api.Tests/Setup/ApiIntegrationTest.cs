@@ -2,7 +2,7 @@
 
 public abstract class ApiIntegrationTest(ApiFixture fixture) : IAsyncLifetime
 {
-    protected readonly HttpClient _client = fixture.Factory.CreateClient();
+    protected HttpClient Client { get; } = fixture.Factory.CreateClient();
 
     public async Task InitializeAsync()
     {

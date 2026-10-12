@@ -1,6 +1,6 @@
 ﻿namespace Starter.Api.Common.Authorization;
 
-public static class ApplicationRoles
+internal static class ApplicationRoles
 {
     public const string Admin = "Admin";
     public const string Reviewer = "Reviewer";

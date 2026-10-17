@@ -25,10 +25,6 @@ public abstract class Result(bool isSuccess, Error? error)
     public bool IsFailure => !IsSuccess;
 }
 
-[SuppressMessage(
-    "Design",
-    "CA1000:Do not declare static members on generic types",
-    Justification = "Static factory and conversion methods are intentionally exposed by Result<T>.")]
 public sealed class Result<T> : Result
 {
     private readonly T? _value;

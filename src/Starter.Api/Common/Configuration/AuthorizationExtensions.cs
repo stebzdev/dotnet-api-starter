@@ -12,7 +12,7 @@ internal static class AuthorizationExtensions
             .AddPolicy(
                 AuthorizationPolicies.CanManageSampleItems,
                 policy => policy.RequireRole(ApplicationRoles.Admin));
-                    
+
         return services;
     }
 }

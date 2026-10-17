@@ -290,7 +290,7 @@ dotnet_diagnostic.CA1812.severity = none   # EF Core instantiates configuration 
 dotnet_diagnostic.MA0182.severity = none	# EF Core discovers entity configuration types through reflection.
 
 #EF Core entities
-[src/Starter.Domain/**/{ReportingEntity,ReportingPeriod,ReportingImport}.cs]
+[src/Starter.Domain/**/{SampleItems}.cs]
 dotnet_diagnostic.RCS1170.severity = none  # EF Core entities intentionally use private setters for materialization.
 
 # EF Core generated migrations

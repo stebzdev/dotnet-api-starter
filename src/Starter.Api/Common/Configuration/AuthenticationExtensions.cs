@@ -16,7 +16,6 @@ internal static class AuthenticationExtensions
 
         var metadataAddress = $"{keycloakUrl.TrimEnd('/')}/realms/{realm}/.well-known/openid-configuration";
 
-
         services
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddKeycloakJwtBearer(

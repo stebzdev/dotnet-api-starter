@@ -20,7 +20,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
         request.Content = JsonContent.Create(new
         {
             Name = "Aurora Financial Group",
-            Code = "AFG"
+            Code = "AFG",
         });
 
         using var response = await Client.SendAsync(request);
@@ -44,7 +44,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
         firstRequest.Content = JsonContent.Create(new
         {
             Name = "Aurora Financial Group",
-            Code = "AFG"
+            Code = "AFG",
         });
 
         using var firstResponse = await Client.SendAsync(firstRequest);
@@ -59,7 +59,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
         secondRequest.Content = JsonContent.Create(new
         {
             Name = "Another Financial Group",
-            Code = "AFG"
+            Code = "AFG",
         });
 
         using var response = await Client.SendAsync(secondRequest);
@@ -78,7 +78,7 @@ public sealed class CreateSampleItemEndpointTests(ApiFixture fixture) : ApiInteg
         request.Content = JsonContent.Create(new
         {
             Name = "Aurora Financial Group",
-            Code = " "
+            Code = " ",
         });
 
         using var response = await Client.SendAsync(request);

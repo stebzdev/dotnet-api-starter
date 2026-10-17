@@ -29,7 +29,7 @@ public static class ApplicationServiceCollectionExtensions
             options.DefaultEntryOptions = new HybridCacheEntryOptions
             {
                 Expiration = TimeSpan.FromMinutes(30),
-                LocalCacheExpiration = TimeSpan.FromMinutes(5)
+                LocalCacheExpiration = TimeSpan.FromMinutes(5),
             };
         });
 
@@ -38,4 +38,4 @@ public static class ApplicationServiceCollectionExtensions
 
         return services;
     }
-}   
+}

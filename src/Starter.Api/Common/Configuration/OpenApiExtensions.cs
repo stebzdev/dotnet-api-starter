@@ -7,10 +7,7 @@ internal static class OpenApiExtensions
 {
     public static IServiceCollection AddStarterOpenApi(this IServiceCollection services)
     {
-        services.AddOpenApi(options =>
-        {
-            options.AddDocumentTransformer<KeycloakSecuritySchemeTransformer>();
-        });
+        services.AddOpenApi(options => options.AddDocumentTransformer<KeycloakSecuritySchemeTransformer>());
 
         return services;
     }

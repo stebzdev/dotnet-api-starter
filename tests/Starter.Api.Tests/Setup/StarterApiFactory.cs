@@ -20,7 +20,7 @@ public sealed class StarterApiFactory(PostgreSqlFixture postgresFixture) : WebAp
             configuration.AddInMemoryCollection(
                 new Dictionary<string, string?>(StringComparer.Ordinal)
                 {
-                    ["ConnectionStrings:StarterDb"] = postgresFixture.ConnectionString
+                    ["ConnectionStrings:StarterDb"] = postgresFixture.ConnectionString,
                 });
         });
 

@@ -72,10 +72,10 @@ public sealed class StructureTests
 
                 return assembly
                     .GetTypes()
-                    .Where(type => !TestAssemblies.IsGeneratedType(type))
-                    .Where(type => !TestAssemblies.IsGeneratedFrameworkType(type))
-                    .Where(type => !TestAssemblies.IsCoverageInstrumentationType(type))
-                    .Where(type => type.Namespace is null || !type.Namespace.StartsWith(projectName, StringComparison.Ordinal));
+                    .Where(type => !TestAssemblies.IsGeneratedType(type)
+                            && !TestAssemblies.IsGeneratedFrameworkType(type)
+                            && !TestAssemblies.IsCoverageInstrumentationType(type)
+                            && (type?.Namespace is null || !type.Namespace.StartsWith(projectName, StringComparison.Ordinal)));
             }).ToArray();
 
         Assert.True(

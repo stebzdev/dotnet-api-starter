@@ -1,4 +1,3 @@
-using Starter.Api.Common.Authentication;
 using Starter.Api.Common.Configuration;
 using Starter.Api.Common.Exceptions;
 using Starter.Api.Common.Extensions;
@@ -16,10 +15,7 @@ builder.Services.AddStarterOpenApi();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-builder.Services.Configure<RouteHandlerOptions>(options =>
-{
-    options.ThrowOnBadRequest = false;
-});
+builder.Services.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = false);
 
 builder.Services.AddApplication(builder.Configuration);
 builder.AddInfrastructure();

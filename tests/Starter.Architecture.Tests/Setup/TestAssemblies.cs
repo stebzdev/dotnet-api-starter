@@ -18,7 +18,7 @@ internal static class TestAssemblies
         TestAssemblies.Domain,
         TestAssemblies.Application,
         TestAssemblies.Api,
-        TestAssemblies.Infrastructure
+        TestAssemblies.Infrastructure,
     ];
 
     internal static bool IsGeneratedFrameworkType(Type type)

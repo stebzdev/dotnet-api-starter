@@ -10,6 +10,6 @@ internal static class ResultExtensions
         ErrorType.Validation => HttpResults.BadRequest(error),
         ErrorType.NotFound => HttpResults.NotFound(error),
         ErrorType.Conflict => HttpResults.Conflict(error),
-        _ => throw new ArgumentOutOfRangeException(nameof(error), error.Type, "Unsupported error type.")
+        _ => throw new ArgumentOutOfRangeException(nameof(error), error.Type, "Unsupported error type."),
     };
 }

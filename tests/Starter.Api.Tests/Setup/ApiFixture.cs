@@ -18,7 +18,7 @@ public sealed class ApiFixture : IAsyncLifetime
 
         Factory = new StarterApiFactory(_postgres);
 
-        using var scope = Factory.Services.CreateScope();
+        await using var scope = Factory.Services.CreateAsyncScope();
 
         var dbContext = scope.ServiceProvider.GetRequiredService<StarterDbContext>();
 

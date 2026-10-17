@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using Starter.Api.Common.Authorization;
-using Starter.Api.SampleItems.Create;
 using Starter.Api.Tests.Setup;
 
 namespace Starter.Api.Tests.Common.Security;
@@ -17,7 +16,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
             new
             {
                 Name = "Aurora Financial Group",
-                Code = "AUTH-TEST"
+                Code = "AUTH-TEST",
             });
 
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -34,7 +33,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
         request.Content = JsonContent.Create(new
         {
             Name = "Aurora Financial Group",
-            Code = "AUTH-TEST"
+            Code = "AUTH-TEST",
         });
 
         using var response = await Client.SendAsync(request);
@@ -53,7 +52,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
         request.Content = JsonContent.Create(new
         {
             Name = "Aurora Financial Group",
-            Code = "AUTH-TEST"
+            Code = "AUTH-TEST",
         });
 
         var response = await Client.SendAsync(request);
@@ -72,7 +71,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
         request.Content = JsonContent.Create(new
         {
             Name = "Sample Item",
-            Code = "AUTH-001"
+            Code = "AUTH-001",
         });
 
         using var response = await Client.SendAsync(request);
@@ -91,7 +90,7 @@ public sealed class SecurityTests(ApiFixture fixture) : ApiIntegrationTest(fixtu
         request.Content = JsonContent.Create(new
         {
             Name = "Sample Item",
-            Code = "AUTH-002"
+            Code = "AUTH-002",
         });
 
         using var response = await Client.SendAsync(request);

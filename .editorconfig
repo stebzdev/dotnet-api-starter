@@ -279,9 +279,10 @@ dotnet_diagnostic.CA1812.severity = none   # Registered and instantiated through
 dotnet_diagnostic.CA1812.severity = none   # OpenAPI components are instantiated through dependency injection
 
 # EF Core configurations
-[**/Configurations/*.cs]
+[src/Starter.Application/Configurations/*.cs]
 dotnet_diagnostic.CA1062.severity = none   # EF Core supplies non-null framework arguments
 dotnet_diagnostic.CA1812.severity = none   # EF Core instantiates configuration types via reflection
+dotnet_diagnostic.RCS1170.severity = none  # EF Core entities intentionally use private setters for materialization.
 
 # EF Core generated migrations
 [**/Migrations/*.cs]
@@ -297,3 +298,8 @@ dotnet_diagnostic.CA1062.severity = none   # Test framework supplies non-null in
 dotnet_diagnostic.CA1515.severity = none   # xUnit requires some infrastructure types to be public
 dotnet_diagnostic.CA1707.severity = none   # Underscores are intentionally used in test method names
 dotnet_diagnostic.CA1711.severity = none   # "Collection" is valid terminology for xUnit test collections
+
+# Deprecated analyzer rules
+
+dotnet_diagnostic.MA0038.severity = none   # MA0038 is deprecated. CA1822 provides the equivalent rule for detecting instance methods that can be made static.
+dotnet_diagnostic.MA0018.severity = none   # MA0018 is deprecated. CA1000 provides the equivalent rule for static members declared on generic types.

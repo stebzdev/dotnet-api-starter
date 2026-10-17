@@ -8,7 +8,7 @@ public sealed class ResultExtensionsTests
     [Fact]
     public void ToProblem_WhenErrorTypeIsUnsupported_ShouldThrowArgumentOutOfRangeException()
     {
-        var unsupportedErrorType = (ErrorType)999;
+        const ErrorType unsupportedErrorType = (ErrorType)999;
         var error = new Error(
             "Test.Error",
             "Test error.",

@@ -26,7 +26,7 @@ public sealed class GlobalExceptionHandlerTests(ApiFixture fixture) : ApiIntegra
         request.Content = JsonContent.Create(new
         {
             Name = "Aurora Financial Group",
-            Code = ""
+            Code = "",
         });
 
         using var response = await Client.SendAsync(request);
@@ -65,7 +65,7 @@ public sealed class GlobalExceptionHandlerTests(ApiFixture fixture) : ApiIntegra
         Assert.Equal(StatusCodes.Status500InternalServerError, httpContext.Response.StatusCode);
 
         responseBody.Position = 0;
-        using var response = await JsonDocument.ParseAsync(responseBody);
+        using var response = await JsonDocument.ParseAsync(responseBody, cancellationToken: httpContext.RequestAborted);
         var root = response.RootElement;
 
         Assert.Equal(ProblemDetailsTitles.UnexpectedError, root.GetProperty("title").GetString());

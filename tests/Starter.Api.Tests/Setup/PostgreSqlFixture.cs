@@ -37,7 +37,7 @@ public sealed class PostgreSqlFixture : IAsyncLifetime
             new RespawnerOptions
             {
                 DbAdapter = DbAdapter.Postgres,
-                SchemasToInclude = ["public"]
+                SchemasToInclude = ["public"],
             });
     }
 

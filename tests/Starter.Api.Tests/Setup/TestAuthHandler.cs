@@ -11,7 +11,7 @@ public sealed class TestAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions>
 {
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        if (!Request.Headers.TryGetValue(TestAuthDefaults.UserHeader, out var _))
+        if (!Request.Headers.ContainsKey(TestAuthDefaults.UserHeader))
         {
             return Task.FromResult(AuthenticateResult.NoResult());
         }
@@ -19,7 +19,7 @@ public sealed class TestAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions>
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, TestAuthDefaults.UserName),
-            new(ClaimTypes.Name, "Test User")
+            new(ClaimTypes.Name, "Test User"),
         };
 
         if (Request.Headers.TryGetValue(TestAuthDefaults.RolesHeader, out var roles))

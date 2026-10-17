@@ -1,17 +1,13 @@
 ﻿
+using System.Diagnostics.CodeAnalysis;
+
 namespace Starter.Application.Common.Results;
 
-public abstract class Result
+public abstract class Result(bool isSuccess, Error? error)
 {
-    private readonly Error? _error;
+    private readonly Error? _error = error;
 
-    protected Result(bool isSuccess, Error? error)
-    {
-        IsSuccess = isSuccess;
-        _error = error;
-    }
-
-    public bool IsSuccess { get; }
+    public bool IsSuccess { get; } = isSuccess;
 
     public Error Error
     {
@@ -29,6 +25,10 @@ public abstract class Result
     public bool IsFailure => !IsSuccess;
 }
 
+[SuppressMessage(
+    "Design",
+    "CA1000:Do not declare static members on generic types",
+    Justification = "Static factory and conversion methods are intentionally exposed by Result<T>.")]
 public sealed class Result<T> : Result
 {
     private readonly T? _value;
@@ -47,6 +47,15 @@ public sealed class Result<T> : Result
             return _value!;
         }
     }
-    public static Result<T> Success(T value) => new(true, value, null);
-    public static Result<T> Failure(Error error) => new(false, default, error);
+
+    public static Result<T> Success(T value) => new(isSuccess: true, value, error: null);
+
+    public static Result<T> Failure(Error error) => new(isSuccess: false, value: default, error);
+
+    public static implicit operator Result<T>(Error error)
+    {
+        return Result<T>.Failure(error);
+    }
+
+    public static Result<T> ToResult(Error error) => Result<T>.Failure(error);
 }

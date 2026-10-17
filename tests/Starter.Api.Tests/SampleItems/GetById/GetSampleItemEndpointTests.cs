@@ -22,7 +22,7 @@ public sealed class GetSampleItemEndpointTests(ApiFixture fixture) : ApiIntegrat
         createRequest.Content = JsonContent.Create(new
         {
             Name = name,
-            Code = code
+            Code = code,
         });
 
         using var createResponse = await Client.SendAsync(createRequest);

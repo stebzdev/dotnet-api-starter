@@ -36,7 +36,7 @@ public sealed class PostgreSqlFixture : IAsyncLifetime
         _respawner = await Respawner.CreateAsync(connection, new RespawnerOptions
         {
             DbAdapter = DbAdapter.Postgres,
-            SchemasToInclude = ["public"]
+            SchemasToInclude = ["public"],
         });
     }
 
@@ -51,5 +51,5 @@ public sealed class PostgreSqlFixture : IAsyncLifetime
     public async Task DisposeAsync()
     {
         await _container.DisposeAsync();
-    }   
+    }
 }

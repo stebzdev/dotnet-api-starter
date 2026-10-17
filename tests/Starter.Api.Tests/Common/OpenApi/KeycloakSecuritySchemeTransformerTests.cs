@@ -15,14 +15,14 @@ public sealed class KeycloakSecuritySchemeTransformerTests
             .AddInMemoryCollection(new Dictionary<string, string?>(StringComparer.Ordinal)
             {
                 ["Keycloak:Authority"] = "https://localhost:8080/",
-                ["Keycloak:Realm"] = "Starter"
+                ["Keycloak:Realm"] = "Starter",
             })
             .Build();
 
         var transformer = new KeycloakSecuritySchemeTransformer(configuration);
         var document = new OpenApiDocument();
 
-        using var serviceProvider = new ServiceCollection().BuildServiceProvider();
+        await using var serviceProvider = new ServiceCollection().BuildServiceProvider();
         var context = CreateContext(serviceProvider);
 
         await transformer.TransformAsync(document, context, CancellationToken.None);
@@ -44,14 +44,14 @@ public sealed class KeycloakSecuritySchemeTransformerTests
         var configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(new Dictionary<string, string?>(StringComparer.Ordinal)
             {
-                ["Keycloak:Realm"] = "Starter"
+                ["Keycloak:Realm"] = "Starter",
             })
             .Build();
 
         var transformer = new KeycloakSecuritySchemeTransformer(configuration);
         var document = new OpenApiDocument();
 
-        using var serviceProvider = new ServiceCollection().BuildServiceProvider();
+        await using var serviceProvider = new ServiceCollection().BuildServiceProvider();
         var context = CreateContext(serviceProvider);
 
         Task Action() => transformer.TransformAsync(document, context, CancellationToken.None);
@@ -67,14 +67,14 @@ public sealed class KeycloakSecuritySchemeTransformerTests
         var configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(new Dictionary<string, string?>(StringComparer.Ordinal)
             {
-                ["Keycloak:Authority"] = "https://localhost:8080/"
+                ["Keycloak:Authority"] = "https://localhost:8080/",
             })
             .Build();
 
         var transformer = new KeycloakSecuritySchemeTransformer(configuration);
         var document = new OpenApiDocument();
 
-        using var serviceProvider = new ServiceCollection().BuildServiceProvider();
+        await using var serviceProvider = new ServiceCollection().BuildServiceProvider();
         var context = CreateContext(serviceProvider);
 
         Task Action() => transformer.TransformAsync(document, context, CancellationToken.None);
@@ -90,7 +90,7 @@ public sealed class KeycloakSecuritySchemeTransformerTests
         {
             DocumentName = "v1",
             DescriptionGroups = [],
-            ApplicationServices = serviceProvider
+            ApplicationServices = serviceProvider,
         };
     }
 }

@@ -22,8 +22,8 @@ internal sealed class KeycloakSecuritySchemeTransformer(IConfiguration configura
             [SchemeName] = new OpenApiSecurityScheme
             {
                 Type = SecuritySchemeType.OpenIdConnect,
-                OpenIdConnectUrl = new Uri(discoveryUrl)
-            }
+                OpenIdConnectUrl = new Uri(discoveryUrl),
+            },
         };
 
         return Task.CompletedTask;

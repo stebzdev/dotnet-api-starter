@@ -49,6 +49,6 @@ var migrations = api.AddEFMigrations("Starter-migrations")
     .RunDatabaseUpdateOnStart();
 
 api.WaitForCompletion(migrations);
- 
+
 
 await builder.Build().RunAsync();

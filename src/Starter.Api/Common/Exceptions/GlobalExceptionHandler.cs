@@ -15,14 +15,14 @@ internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> log
             {
                 Status = StatusCodes.Status400BadRequest,
                 Title = ProblemDetailsTitles.ValidationError,
-                Detail = domainException.Message
+                Detail = domainException.Message,
             },
 
             _ => new ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,
                 Title = ProblemDetailsTitles.UnexpectedError,
-            }
+            },
         };
 
         problemDetails.Extensions["traceId"] = httpContext.TraceIdentifier;

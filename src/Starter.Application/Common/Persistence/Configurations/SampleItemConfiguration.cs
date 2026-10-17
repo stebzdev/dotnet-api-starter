@@ -1,9 +1,14 @@
-﻿using Starter.Domain.SampleItems;
+﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Starter.Domain.SampleItems;
 
 namespace Starter.Application.Common.Persistence.Configurations;
 
+[SuppressMessage(
+    "Performance",
+    "CA1812:Avoid uninstantiated internal classes",
+    Justification = "The configuration is discovered and instantiated by Entity Framework Core.")]
 internal sealed class SampleItemConfiguration : IEntityTypeConfiguration<SampleItem>
 {
     public void Configure(EntityTypeBuilder<SampleItem> builder)

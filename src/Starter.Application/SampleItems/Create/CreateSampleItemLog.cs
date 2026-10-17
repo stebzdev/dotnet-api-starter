@@ -1,5 +1,5 @@
-﻿using Starter.Domain.SampleItems;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Starter.Domain.SampleItems;
 
 namespace Starter.Application.SampleItems.Create;
 

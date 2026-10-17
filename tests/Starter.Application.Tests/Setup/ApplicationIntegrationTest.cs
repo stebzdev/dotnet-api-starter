@@ -1,5 +1,5 @@
-﻿using Starter.Application.Common.Persistence;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Starter.Application.Common.Persistence;
 
 namespace Starter.Application.Tests.Setup;
 public abstract class ApplicationIntegrationTest : IAsyncLifetime

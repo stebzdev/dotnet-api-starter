@@ -1,7 +1,7 @@
-﻿using Starter.Application.Common.Persistence;
-using Starter.Application.Common.Results;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Hybrid;
+using Starter.Application.Common.Persistence;
+using Starter.Application.Common.Results;
 
 namespace Starter.Application.SampleItems.GetById;
 

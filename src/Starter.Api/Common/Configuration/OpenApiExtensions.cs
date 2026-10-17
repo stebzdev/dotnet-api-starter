@@ -1,5 +1,5 @@
-﻿using Starter.Api.Common.OpenApi;
-using Scalar.AspNetCore;
+﻿using Scalar.AspNetCore;
+using Starter.Api.Common.OpenApi;
 
 namespace Starter.Api.Common.Extensions;
 

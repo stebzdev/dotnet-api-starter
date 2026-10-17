@@ -1,5 +1,5 @@
-﻿using Starter.Architecture.Tests.Setup;
-using NetArchTest.Rules;
+﻿using NetArchTest.Rules;
+using Starter.Architecture.Tests.Setup;
 
 namespace Starter.Architecture.Tests;
 

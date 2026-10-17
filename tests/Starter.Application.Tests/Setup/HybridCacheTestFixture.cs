@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
-using Starter.Application.Common.Caching;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.DependencyInjection;
+using Starter.Application.Common.Caching;
 
 namespace Starter.Application.Tests.Setup;
 

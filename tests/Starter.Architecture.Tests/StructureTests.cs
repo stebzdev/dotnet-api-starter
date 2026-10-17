@@ -1,6 +1,6 @@
-﻿using Starter.Application.Common.CQRS;
+﻿using NetArchTest.Rules;
+using Starter.Application.Common.CQRS;
 using Starter.Architecture.Tests.Setup;
-using NetArchTest.Rules;
 
 namespace Starter.Architecture.Tests;
 

@@ -1,5 +1,5 @@
-﻿using Starter.Application.Common.Results;
-using Starter.Api.Common.Http;
+﻿using Starter.Api.Common.Http;
+using Starter.Application.Common.Results;
 
 namespace Starter.Api.Tests.Common.Http;
 

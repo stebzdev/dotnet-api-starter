@@ -1,12 +1,12 @@
 ﻿using System.Text.Json;
-using Starter.Application.Common.Caching;
-using Starter.Application.Common.Persistence;
-using Starter.Application.SampleItems.Create;
-using Starter.Application.SampleItems.GetById;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Starter.Application.Common.Caching;
+using Starter.Application.Common.Persistence;
+using Starter.Application.SampleItems.Create;
+using Starter.Application.SampleItems.GetById;
 
 namespace Starter.Application;
 

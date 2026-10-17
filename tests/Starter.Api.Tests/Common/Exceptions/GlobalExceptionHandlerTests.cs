@@ -1,14 +1,14 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging.Abstractions;
 using Starter.Api.Common.Authorization;
 using Starter.Api.Common.Exceptions;
 using Starter.Api.Common.Http;
 using Starter.Api.Tests.Setup;
 using Starter.Domain.SampleItems;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Starter.Api.Tests.Common.Exceptions;
 

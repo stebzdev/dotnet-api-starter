@@ -1,7 +1,7 @@
-﻿using Starter.Application.Common.Persistence;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using Respawn;
+using Starter.Application.Common.Persistence;
 using Testcontainers.PostgreSql;
 
 namespace Starter.Application.Tests.Setup;

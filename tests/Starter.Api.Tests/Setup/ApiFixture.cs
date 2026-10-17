@@ -1,6 +1,6 @@
-﻿using Starter.Application.Common.Persistence;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Starter.Application.Common.Persistence;
 
 namespace Starter.Api.Tests.Setup;
 

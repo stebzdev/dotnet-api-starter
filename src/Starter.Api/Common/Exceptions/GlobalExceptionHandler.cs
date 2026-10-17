@@ -1,7 +1,7 @@
-﻿using Starter.Api.Common.Http;
-using Starter.Domain.Common;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Starter.Api.Common.Http;
+using Starter.Domain.Common;
 
 namespace Starter.Api.Common.Exceptions;
 

@@ -1,5 +1,5 @@
-﻿using Starter.Domain.SampleItems;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Starter.Domain.SampleItems;
 
 namespace Starter.Application.Common.Persistence;
 

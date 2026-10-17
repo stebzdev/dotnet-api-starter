@@ -1,9 +1,9 @@
-﻿using Starter.Application.SampleItems;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Abstractions;
+using Starter.Application.SampleItems;
 using Starter.Application.SampleItems.Create;
 using Starter.Application.Tests.Setup;
 using Starter.Domain.SampleItems;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Starter.Application.Tests.SampleItems.Create;
 

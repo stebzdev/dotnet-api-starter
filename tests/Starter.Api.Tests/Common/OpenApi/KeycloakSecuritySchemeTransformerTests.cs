@@ -1,8 +1,8 @@
-﻿using Starter.Api.Common.OpenApi;
-using Microsoft.AspNetCore.OpenApi;
+﻿using Microsoft.AspNetCore.OpenApi;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi;
+using Starter.Api.Common.OpenApi;
 
 namespace Starter.Api.Tests.Common.OpenApi;
 

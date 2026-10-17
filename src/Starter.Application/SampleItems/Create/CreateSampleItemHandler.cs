@@ -4,7 +4,6 @@ using Starter.Application.Common.CQRS;
 using Starter.Application.Common.Persistence;
 using Starter.Application.Common.Results;
 using Starter.Domain.SampleItems;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Starter.Application.SampleItems.Create;
 
@@ -24,7 +23,7 @@ public sealed class CreateSampleItemHandler(
         {
             CreateSampleItemLog.AlreadyExists(logger, command.Code.Value);
 
-            return Result<CreateSampleItemResult>.Failure(SampleItemErrors.AlreadyExists);
+            return SampleItemErrors.AlreadyExists;
         }
 
         var sampleItem = SampleItem.Create(command.Name, command.Code);

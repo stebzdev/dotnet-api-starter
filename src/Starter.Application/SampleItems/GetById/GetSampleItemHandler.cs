@@ -26,7 +26,7 @@ public sealed class GetSampleItemHandler(StarterDbContext dbContext, HybridCache
 
         if (result is null)
         {
-            return Result<GetSampleItemResult>.Failure(SampleItemErrors.NotFound);
+            return SampleItemErrors.NotFound;
         }
 
         return Result<GetSampleItemResult>.Success(result);
